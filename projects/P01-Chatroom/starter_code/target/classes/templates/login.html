@@ -133,7 +133,7 @@
 <body>
 <div class="logo_box">
     <h3>Chat Room</h3>
-    <form>
+    <form action="index">
         <div class="input_outer">
             <span class="u_user"></span>
             <input id="username" name="username" class="text" type="text" placeholder="Username">
@@ -150,7 +150,9 @@
      * Login
      */
     function login() {
-        location.href = '/index?username='+$('#username').val();
+        var name = $("#username").val();
+        //this looks stupid but I did not find any other way
+        window.location.href = "//localhost:8080/index?username=" + name;
     }
 
     /**
@@ -160,6 +162,7 @@
         var e = event || window.event || arguments.callee.caller.arguments[0];
         e.keyCode === 13 && login();
     };
+
 
 </script>
 
