@@ -52,6 +52,7 @@ public class VehiclesApiApplication {
      */
     @Bean(name="maps")
     public WebClient webClientMaps(@Value("${maps.endpoint}") String endpoint) {
+        System.out.println("Webclient of maps created in uri: " + endpoint);
         return WebClient.create(endpoint);
     }
 
@@ -62,6 +63,7 @@ public class VehiclesApiApplication {
      */
     @Bean(name="pricing")
     public WebClient webClientPricing(@Value("${pricing.endpoint}") String endpoint) {
+        System.out.println("Webclient of pricing created in uri: " + endpoint);
         return WebClient.create(endpoint);
     }
 
