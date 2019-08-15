@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -51,6 +52,7 @@ public class VehiclesApiApplication {
      * @return created maps endpoint
      */
     @Bean(name="maps")
+    @Primary
     public WebClient webClientMaps(@Value("${maps.endpoint}") String endpoint) {
         System.out.println("Webclient of maps created in uri: " + endpoint);
         return WebClient.create(endpoint);

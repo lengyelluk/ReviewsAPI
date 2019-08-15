@@ -1,10 +1,15 @@
 package com.udacity.vehicles.service;
 
+import com.udacity.vehicles.client.maps.MapsClient;
+import com.udacity.vehicles.client.prices.PriceClient;
+import com.udacity.vehicles.domain.Location;
 import com.udacity.vehicles.domain.car.Car;
 import com.udacity.vehicles.domain.car.CarRepository;
 import java.util.List;
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -17,19 +22,21 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class CarService {
 
     private final CarRepository repository;
+
     private WebClient clientMaps;
     private WebClient clientPricing;
+    private ModelMapper modelMapper;
 
-
-    public CarService(CarRepository repository) {
+    public CarService(CarRepository repository, WebClient clientMaps, WebClient clientPricing, ModelMapper modelMapper) {
         /**
          * TODO: Add the Maps and Pricing Web Clients you create
          *   in `VehiclesApiApplication` as arguments and set them here.
          */
         this.repository = repository;
-        /*this.clientMaps = clientMaps;
-        this.clientPricing = clientPricing;*/
-        System.out.println("Car service created without car repository and two webclients");
+        this.clientMaps = clientMaps;
+        this.clientPricing = clientPricing;
+        this.modelMapper = modelMapper;
+        System.out.println("Car service created with car repository and two webclients");
     }
 
     /**
@@ -54,11 +61,20 @@ public class CarService {
          */
         //try to find a car in repository using id
 
-        Optional<Car> car = repository.findById(id);
+        Optional<Car> optionalCar = repository.findById(id);
 
         //if it exists
-        if(car.isPresent()) {
-            System.out.println("car was found");
+        if(optionalCar.isPresent()) {
+            Car car = optionalCar.get();
+
+            PriceClient priceClient = new PriceClient(clientPricing);
+
+            String currencyAndPrice = priceClient.getPrice(id);
+            System.out.println(currencyAndPrice);
+
+            MapsClient mapsClient = new MapsClient(clientMaps, modelMapper);
+            Location location = car.getLocation();
+            Location address = mapsClient.getAddress(location);
         } else {
             throw new CarNotFoundException();
         }
@@ -82,7 +98,7 @@ public class CarService {
          */
 
 
-        return car.get();
+        return optionalCar.get();
     }
 
     /**
