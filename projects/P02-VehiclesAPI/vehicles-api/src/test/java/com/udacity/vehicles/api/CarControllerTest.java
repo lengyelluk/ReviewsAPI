@@ -1,7 +1,7 @@
 package com.udacity.vehicles.api;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -21,9 +21,14 @@ import com.udacity.vehicles.domain.manufacturer.Manufacturer;
 import com.udacity.vehicles.service.CarService;
 import java.net.URI;
 import java.util.Collections;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,6 +38,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 /**
  * Implements testing of the CarController class.
@@ -96,8 +102,22 @@ public class CarControllerTest {
          *   the whole list of vehicles. This should utilize the car from `getCar()`
          *   below (the vehicle will be the first in the list).
          */
+        Car car = getCar();
 
+        String expected = "{\"_embedded\":{\"carList\":[{\"id\":1,\"createdAt\":null,\"modifiedAt\":null," +
+                "\"condition\":\"USED\",\"details\":{\"body\":\"sedan\",\"model\":\"Impala\",\"manufacturer\":" +
+                "{\"code\":101,\"name\":\"Chevrolet\"},\"numberOfDoors\":4,\"fuelType\":\"Gasoline\",\"engine\":" +
+                "\"3.6L V6\",\"mileage\":32280,\"modelYear\":2018,\"productionYear\":2018,\"externalColor\":\"white\"}" +
+                ",\"location\":{\"lat\":40.73061,\"lon\":-73.935242,\"address\":null,\"city\":null,\"state\":null,\"zip\":null" +
+                "},\"price\":null,\"_links\":{\"self\":{\"href\":\"http://localhost/cars/1\"},\"cars\":{\"href\":\"http://localhost/cars\"}}}]}" +
+                ",\"_links\":{\"self\":{\"href\":\"http://localhost/cars\"}}}";
+        mvc.perform(
+                get(new URI("/cars"))
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(content().json(expected));
     }
+
 
     /**
      * Tests the read operation for a single car by ID.
@@ -109,6 +129,17 @@ public class CarControllerTest {
          * TODO: Add a test to check that the `get` method works by calling
          *   a vehicle by ID. This should utilize the car from `getCar()` below.
          */
+        Car car = getCar();
+        mvc.perform(
+                get(new URI("/cars/1"))
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.condition", is("USED")))
+                .andExpect(jsonPath("$.details.model", is("Impala")))
+                .andExpect(jsonPath("$.details.mileage", is(32280)))
+                .andExpect(jsonPath("$.details.modelYear", is(2018)))
+                .andExpect(jsonPath("$.details.manufacturer.code", is(101)));
     }
 
     /**
@@ -122,6 +153,27 @@ public class CarControllerTest {
          *   when the `delete` method is called from the Car Controller. This
          *   should utilize the car from `getCar()` below.
          */
+        Car car = getCar();
+
+        mvc.perform(
+                get(new URI("/cars/1"))
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)));
+
+        mvc.perform(
+                delete("/cars/1"));
+
+        MvcResult result = mvc.perform(
+                get(new URI("/cars/1"))
+                        .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+        .andReturn();
+
+        String content = result.getResponse().getContentAsString();
+        Assert.assertNull(content);
+
+        System.out.println("Result after delete: " + result.getResponse().getContentAsString());
     }
 
     /**

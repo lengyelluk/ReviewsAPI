@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriBuilder;
+import org.springframework.web.util.UriBuilderFactory;
 
 /**
  * Implements a class to interface with the Pricing Client for price data.
@@ -31,12 +33,12 @@ public class PriceClient {
      *   service is down.
      */
     public String getPrice(Long vehicleId) {
+
         try {
             Price price = client
                     .get()
                     .uri(uriBuilder -> uriBuilder
-                            .path("services/price/")
-                            .queryParam("vehicleId", vehicleId)
+                            .path("/prices/" + vehicleId)
                             .build()
                     )
                     .retrieve().bodyToMono(Price.class).block();

@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -27,7 +28,8 @@ public class CarService {
     private WebClient clientPricing;
     private ModelMapper modelMapper;
 
-    public CarService(CarRepository repository, WebClient clientMaps, WebClient clientPricing, ModelMapper modelMapper) {
+    public CarService(CarRepository repository, @Qualifier("maps") WebClient clientMaps,
+                      @Qualifier("pricing") WebClient clientPricing, ModelMapper modelMapper) {
         /**
          * TODO: Add the Maps and Pricing Web Clients you create
          *   in `VehiclesApiApplication` as arguments and set them here.
@@ -66,19 +68,6 @@ public class CarService {
         //if it exists
         if(optionalCar.isPresent()) {
             Car car = optionalCar.get();
-
-            PriceClient priceClient = new PriceClient(clientPricing);
-
-            String currencyAndPrice = priceClient.getPrice(id);
-            System.out.println(currencyAndPrice);
-
-            MapsClient mapsClient = new MapsClient(clientMaps, modelMapper);
-            Location location = car.getLocation();
-            Location address = mapsClient.getAddress(location);
-        } else {
-            throw new CarNotFoundException();
-        }
-
         /**
          * TODO: Use the Pricing Web client you create in `VehiclesApiApplication`
          *   to get the price based on the `id` input'
@@ -87,16 +76,25 @@ public class CarService {
          *   the pricing service each time to get the price.
          */
 
+            PriceClient priceClient = new PriceClient(clientPricing);
+            String[] currencyAndPrice = priceClient.getPrice(id).split(" ");
+            car.setPrice(currencyAndPrice[1]);
 
-        /**
-         * TODO: Use the Maps Web client you create in `VehiclesApiApplication`
-         *   to get the address for the vehicle. You should access the location
-         *   from the car object and feed it to the Maps service.
-         * TODO: Set the location of the vehicle, including the address information
-         * Note: The Location class file also uses @transient for the address,
-         * meaning the Maps service needs to be called each time for the address.
-         */
+            /**
+             * TODO: Use the Maps Web client you create in `VehiclesApiApplication`
+             *   to get the address for the vehicle. You should access the location
+             *   from the car object and feed it to the Maps service.
+             * TODO: Set the location of the vehicle, including the address information
+             * Note: The Location class file also uses @transient for the address,
+             * meaning the Maps service needs to be called each time for the address.
+             */
 
+            MapsClient mapsClient = new MapsClient(clientMaps, modelMapper);
+            Location location = car.getLocation();
+            Location address = mapsClient.getAddress(location);
+        } else {
+            throw new CarNotFoundException();
+        }
 
         return optionalCar.get();
     }

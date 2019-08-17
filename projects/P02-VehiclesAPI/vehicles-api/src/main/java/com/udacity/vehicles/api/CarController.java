@@ -45,7 +45,6 @@ class CarController {
      */
     @GetMapping
     Resources<Resource<Car>> list() {
-        System.out.println("I am here!");
         List<Resource<Car>> resources = carService.list().stream().map(assembler::toResource)
                 .collect(Collectors.toList());
         return new Resources<>(resources,
