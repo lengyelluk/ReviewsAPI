@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS comment(
+					id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+					text VARCHAR(350) NOT NULL,
+					created_time TIMESTAMP NOT NULL,
+					review_id INT NOT NULL,
+					user_id INT NOT NULL)
+					ENGINE=InnoDB DEFAULT CHARSET=utf8;
