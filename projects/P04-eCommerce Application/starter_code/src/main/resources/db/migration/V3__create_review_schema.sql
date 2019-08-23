@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS review(
-					id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					rating INT NOT NULL,
-					text VARCHAR(500) NOT NULL,
-					created_time TIMESTAMP NOT NULL,
-					product_id INT NOT NULL,
-					user_id INT NOT NULL)
-					ENGINE=InnoDB DEFAULT CHARSET=utf8;

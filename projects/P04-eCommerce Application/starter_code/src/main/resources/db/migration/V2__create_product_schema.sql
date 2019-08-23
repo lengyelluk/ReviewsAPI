@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS product(
-					id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-					name VARCHAR(150) NOT NULL,
-					price DECIMAL(6,2) NOT NULL,
-					description VARCHAR(500))
-                    ENGINE=InnoDB DEFAULT CHARSET=utf8;
