@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bbbdd27-0f2f-4c26-85ec-54b470d8a1a6" name="Default Changelist" comment="Revert &quot;flyway set to add three new tables&quot;&#10;&#10;This reverts commit da33ddc14bb2bb7d91f099759e1602a5e966b46b.&#10;&#10;# Conflicts:&#10;#&#9;projects/P04-eCommerce Application/starter_code/src/main/resources/application.properties">
-      <change afterPath="$PROJECT_DIR$/../../P03-ReviewsAPI/src/main/java/com/udacity/course3/reviews/entity/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../P03-ReviewsAPI/src/main/java/com/udacity/course3/reviews/entity/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../P03-ReviewsAPI/src/main/java/com/udacity/course3/reviews/entity/Review.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../P03-ReviewsAPI/src/main/resources/db/migration/V1__create_tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../../P03-ReviewsAPI/src/main/resources/db/migration/V1__create_tables.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -205,7 +201,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566561770190" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566562349630" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../P03-ReviewsAPI" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
@@ -285,7 +281,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="7" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18815717" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

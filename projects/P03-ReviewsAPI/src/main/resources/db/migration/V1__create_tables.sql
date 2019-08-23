@@ -14,7 +14,7 @@ create table product (
 
 create table review (
     id int auto_increment,
-    review_title varchat(150),
+    review_title varchar(150),
     review_text varchar(1500),
     created_time timestamp default CURRENT_TIMESTAMP,
     product_id int not null,
