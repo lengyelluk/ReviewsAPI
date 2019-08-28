@@ -17,6 +17,10 @@ public class Comment {
 
     public Comment() {}
 
+    public Comment(Integer id) {
+        this.id = id;
+    }
+
     public Comment(Integer id, String comment_text, Review review) {
         this.id = id;
         this.comment_text = comment_text;

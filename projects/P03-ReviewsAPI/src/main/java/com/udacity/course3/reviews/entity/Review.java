@@ -21,6 +21,10 @@ public class Review {
 
     public Review() {}
 
+    public Review(Integer id) {
+        this.id = id;
+    }
+
     public Review(Integer id, String review_title, String review_text, Product product) {
         this.id = id;
         this.review_title = review_title;

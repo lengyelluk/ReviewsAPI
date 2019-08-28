@@ -1,15 +1,15 @@
 create table comment (
     id int auto_increment,
-    comment_text varchar(500) not null,
+    comment_text varchar(500),
     created_time timestamp default CURRENT_TIMESTAMP,
     review_id int not null,
     PRIMARY KEY (id));
 
 create table product (
     id int auto_increment,
-    name varchar(150) not null,
+    name varchar(150),
     description varchar(255),
-    price decimal(6,2) not null,
+    price decimal(6,2),
     PRIMARY KEY (id));
 
 create table review (
