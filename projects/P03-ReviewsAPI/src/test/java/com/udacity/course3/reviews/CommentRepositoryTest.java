@@ -42,6 +42,7 @@ public class CommentRepositoryTest {
     @Test
     public void givenProductWithReview_whenCommentIsSavedForReview_thenCommentIsReturnedUnderReview(){
         Product product = new Product();
+        product.setName("product");
         productRepository.save(product);
 
         Review review = new Review();

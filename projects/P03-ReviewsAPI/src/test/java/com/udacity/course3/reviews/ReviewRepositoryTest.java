@@ -40,6 +40,7 @@ public class ReviewRepositoryTest {
     @Test
     public void givenProduct_whenReviewIsSavedForProduct_thenReviewIsReturnedUnderProduct(){
         Product product = new Product();
+        product.setName("product");
         productRepository.save(product);
 
         Review review = new Review();

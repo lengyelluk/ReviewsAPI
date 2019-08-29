@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpServerErrorException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void createProduct(@RequestBody Product product) {
+    public void createProduct(@Valid @RequestBody Product product) {
         productRepository.save(product);
     }
 
@@ -50,6 +51,14 @@ public class ProductsController {
         }
     }
 
+    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
+    public ResponseEntity<List<Product>> findAllByName(@PathVariable("name") String name) {
+        if(productRepository.findAllByName(name).size() > 0)
+            return new ResponseEntity(productRepository.findAllByName(name), HttpStatus.OK);
+        else
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
     /**
      * Lists all products.
      *
@@ -59,4 +68,6 @@ public class ProductsController {
     public List<Product> listProducts() {
         return productRepository.findAll();
     }
+
+
 }
