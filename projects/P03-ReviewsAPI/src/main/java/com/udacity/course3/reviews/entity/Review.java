@@ -1,35 +1,26 @@
 package com.udacity.course3.reviews.entity;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "review")
+import java.util.List;
+
+@Document("reviews")
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String review_title;
-
     private String review_text;
-
-    @ManyToOne
+    private List<Comment> comments;
     private Product product;
 
     public Review() {}
 
-    public Review(Integer id) {
-        this.id = id;
-    }
-
-    public Review(Integer id, String review_title, String review_text, Product product) {
-        this.id = id;
+    public Review(String review_title, String review_text) {
         this.review_title = review_title;
         this.review_text = review_text;
-        this.product = product;
     }
 
     public Integer getId() {
@@ -54,6 +45,14 @@ public class Review {
 
     public void setReview_text(String review_text) {
         this.review_text = review_text;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Product getProduct() {

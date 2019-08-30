@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,19 +26,19 @@ public class ReviewsController {
     private ReviewRepository reviewRepository;
 
     /**
-     * Creates a review for a product.
+     * Creates a reviewMySql for a product.
      * <p>
-     * 1. Add argument for review entity. Use {@link RequestBody} annotation.
+     * 1. Add argument for reviewMySql entity. Use {@link RequestBody} annotation.
      * 2. Check for existence of product.
      * 3. If product not found, return NOT_FOUND.
-     * 4. If found, save review.
+     * 4. If found, save reviewMySql.
      *
      * @param productId The id of the product.
-     * @return The created review or 404 if product id is not found.
+     * @return The created reviewMySql or 404 if product id is not found.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.POST)
     public ResponseEntity<Review> createReviewForProduct(@PathVariable("productId") Integer productId,
-                                                    @RequestBody Review review) {
+                                                         @RequestBody Review review) {
         Optional<Product> optionalProduct =  productRepository.findById(productId);
         if(optionalProduct.isPresent()) {
             review.setProduct(optionalProduct.get());

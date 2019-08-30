@@ -51,13 +51,6 @@ public class ProductsController {
         }
     }
 
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET)
-    public ResponseEntity<List<Product>> findAllByName(@PathVariable("name") String name) {
-        if(productRepository.findAllByName(name).size() > 0)
-            return new ResponseEntity(productRepository.findAllByName(name), HttpStatus.OK);
-        else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-    }
 
     /**
      * Lists all products.
