@@ -51,6 +51,22 @@ public class ProductsController {
         }
     }
 
+    /**
+     * Find a product by name
+     *
+     * @param name The name of the product (name of each product is unique)
+     * @return The product if found or a 4040 if not found
+     */
+    @RequestMapping(value = "/name/{name}")
+    public ResponseEntity<Product> findByName(@PathVariable("name") String name) {
+        Optional<Product> optionalProduct = productRepository.findByName(name);
+        if(optionalProduct.isPresent()) {
+            return new ResponseEntity(optionalProduct.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     /**
      * Lists all products.
