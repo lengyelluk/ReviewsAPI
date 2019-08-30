@@ -2,33 +2,36 @@ package com.udacity.course3.reviews.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Document("reviews")
 public class ReviewDocument {
 
     @Id
-    private String id;
+    private Integer id;
     private Integer rating;
     private String review_title;
     private String review_text;
-    private List<CommentDocument> commentDocuments;
-    private Product product;
+    //private List<CommentDocument> commentDocuments;
+    private Integer productId;
+    private LocalDateTime created_time;
 
     public ReviewDocument() {}
 
-    public ReviewDocument(Integer rating, String review_title, String review_text) {
+    public ReviewDocument(Integer rating, String review_title, String review_text, LocalDateTime created_time, Integer productId) {
         this.rating = rating;
         this.review_title = review_title;
         this.review_text = review_text;
+        this.created_time = created_time;
+        this.productId = productId;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,19 +59,29 @@ public class ReviewDocument {
         this.review_text = review_text;
     }
 
-    public List<CommentDocument> getCommentDocuments() {
+    /*public List<CommentDocument> getCommentDocuments() {
         return commentDocuments;
     }
 
     public void setCommentDocuments(List<CommentDocument> commentDocuments) {
         this.commentDocuments = commentDocuments;
     }
+    */
 
-    public Product getProduct() {
-        return product;
+    public void setCreated_time(LocalDateTime created_time) {
+        this.created_time = created_time;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public Integer getProductId() {
+        return productId;
     }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    public LocalDateTime getCreated_time() {
+        return created_time;
+    }
+
 }
