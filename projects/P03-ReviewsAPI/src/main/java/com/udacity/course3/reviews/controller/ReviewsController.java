@@ -21,7 +21,6 @@ import java.util.Optional;
 @RestController
 public class ReviewsController {
 
-    // TODO: Wire JPA repositories here
     @Autowired
     private ProductRepository productRepository;
 
@@ -37,7 +36,7 @@ public class ReviewsController {
      * @return The created review or 404 if product id is not found.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.POST)
-    public ResponseEntity<Review> createReviewForProduct(@PathVariable("productId") Integer productId,
+    public ResponseEntity<ReviewDocument> createReviewForProduct(@PathVariable("productId") Integer productId,
                                                          @RequestBody @Valid Review review) {
         Optional<Product> optionalProduct =  productRepository.findById(productId);
 
@@ -68,7 +67,7 @@ public class ReviewsController {
         //save to MongoDB
         reviewDocumentRepository.save(reviewDocument);
 
-        return new ResponseEntity(review, HttpStatus.OK);
+        return new ResponseEntity(reviewDocument, HttpStatus.OK);
     }
 
     /**

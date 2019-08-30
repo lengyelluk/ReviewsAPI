@@ -13,7 +13,7 @@ public class ReviewDocument {
     private Integer rating;
     private String review_title;
     private String review_text;
-    //private List<CommentDocument> commentDocuments;
+    private List<CommentDocument> commentDocuments;
     private Integer productId;
     private LocalDateTime created_time;
 
@@ -59,14 +59,13 @@ public class ReviewDocument {
         this.review_text = review_text;
     }
 
-    /*public List<CommentDocument> getCommentDocuments() {
+    public List<CommentDocument> getCommentDocuments() {
         return commentDocuments;
     }
 
     public void setCommentDocuments(List<CommentDocument> commentDocuments) {
         this.commentDocuments = commentDocuments;
     }
-    */
 
     public void setCreated_time(LocalDateTime created_time) {
         this.created_time = created_time;
