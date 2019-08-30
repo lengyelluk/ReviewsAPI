@@ -9,7 +9,7 @@ import java.util.List;
 public class Review {
 
     @Id
-    private Integer id;
+    private String id;
 
     private String review_title;
     private String review_text;
@@ -23,11 +23,11 @@ public class Review {
         this.review_text = review_text;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
