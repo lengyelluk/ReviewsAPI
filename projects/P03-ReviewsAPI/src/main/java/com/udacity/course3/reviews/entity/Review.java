@@ -10,7 +10,6 @@ public class Review {
 
     @Id
     private String id;
-
     private String review_title;
     private String review_text;
     private List<Comment> comments;
