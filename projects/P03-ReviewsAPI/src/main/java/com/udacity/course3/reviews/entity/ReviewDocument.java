@@ -1,51 +1,34 @@
 package com.udacity.course3.reviews.entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "review")
-public class Review {
+import java.util.List;
+
+@Document("reviews")
+public class ReviewDocument {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Min(1)
-    @Max(5)
+    private String id;
     private Integer rating;
-
     private String review_title;
-
     private String review_text;
-
-    @ManyToOne
+    private List<CommentDocument> commentDocuments;
     private Product product;
 
-    public Review() {}
+    public ReviewDocument() {}
 
-    public Review(Integer id, Integer rating) {
-        this.id = id;
-        this.rating = rating;
-    }
-
-    public Review(Integer id, Integer rating, String review_title, String review_text, Product product) {
-        this.id = id;
+    public ReviewDocument(Integer rating, String review_title, String review_text) {
         this.rating = rating;
         this.review_title = review_title;
         this.review_text = review_text;
-        this.product = product;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,6 +54,14 @@ public class Review {
 
     public void setReview_text(String review_text) {
         this.review_text = review_text;
+    }
+
+    public List<CommentDocument> getCommentDocuments() {
+        return commentDocuments;
+    }
+
+    public void setCommentDocuments(List<CommentDocument> commentDocuments) {
+        this.commentDocuments = commentDocuments;
     }
 
     public Product getProduct() {
