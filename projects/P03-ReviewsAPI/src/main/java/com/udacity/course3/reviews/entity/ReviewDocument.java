@@ -3,6 +3,7 @@ package com.udacity.course3.reviews.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document("reviews")
@@ -13,7 +14,7 @@ public class ReviewDocument {
     private Integer rating;
     private String review_title;
     private String review_text;
-    private List<CommentDocument> commentDocuments;
+    private List<CommentDocument> commentDocuments = new ArrayList<>();
     private Integer productId;
     private LocalDateTime created_time;
 

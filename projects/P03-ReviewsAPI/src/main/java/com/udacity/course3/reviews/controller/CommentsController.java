@@ -91,7 +91,6 @@ public class CommentsController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity(reviewDocumentRepository.findById(reviewId).get().getCommentDocuments(), HttpStatus.OK);
     }
-
 }
