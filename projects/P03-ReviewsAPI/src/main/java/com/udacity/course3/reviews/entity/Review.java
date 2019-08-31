@@ -38,6 +38,13 @@ public class Review {
         this.product = product;
     }
 
+    public Review(Integer rating, String review_title, String review_text, Product product) {
+        this.rating = rating;
+        this.review_title = review_title;
+        this.review_text = review_text;
+        this.product = product;
+    }
+
     public Integer getId() {
         return id;
     }

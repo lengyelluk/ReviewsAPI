@@ -26,9 +26,14 @@ public class Product {
         this.id = id;
     }
 
-
     public Product(Integer id, String name, String description, BigDecimal price) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
+    public Product(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.price = price;

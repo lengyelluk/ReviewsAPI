@@ -29,6 +29,11 @@ public class Comment {
         this.review = review;
     }
 
+    public Comment(String comment_text, Review review) {
+        this.comment_text = comment_text;
+        this.review = review;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -17,7 +17,6 @@ import java.util.Optional;
 @RequestMapping("/products")
 public class ProductsController {
 
-    // TODO: Wire JPA repositories here
     @Autowired
     private ProductRepository productRepository;
 
