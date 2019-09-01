@@ -3,6 +3,7 @@ package com.udacity.course3.reviews.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "review")
@@ -16,8 +17,10 @@ public class Review {
     @Max(5)
     private Integer rating;
 
+    @NotBlank
     private String review_title;
 
+    @NotBlank
     private String review_text;
 
     @ManyToOne
