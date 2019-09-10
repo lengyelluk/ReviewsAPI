@@ -22,7 +22,7 @@ The project shows:
 
 Create a new Product (POST request)
 ```api
-http://localhost:8080/products/
+/products/
 ```
 
 Body:
@@ -36,27 +36,27 @@ Body:
 
 Get a product by id (GET request)
 ```api
-http://localhost:8080/products/{id}
+/products/{id}
 ```
 
 Get a product by name (GET request)
 ```api
-http://localhost:8080/products/name/{name}
+/products/name/{name}
 ```
 
 Get all existing products (GET request)
 ```api
-http://localhost:8080/products/
+/products/
 ```
 
 Get a review for a product by product id (GET request)
 ```api
-http://localhost:8080/reviews/products/{product_id}
+/reviews/products/{product_id}
 ```
 
 Add a new review for a product (POST request)
 ```api
-http://localhost:8080/reviews/products/{product_id}
+/reviews/products/{product_id}
 ```
 Body:
 ```json
@@ -69,12 +69,12 @@ Body:
 
 Get comments for a review (GET request)
 ```api
-http://localhost:8080/comments/reviews/{review_id}
+/comments/reviews/{review_id}
 ```
 
 Add a new comment for a review (POST request)
 ```api
-http://localhost:8080/comments/reviews/{review_id}
+/comments/reviews/{review_id}
 ```
 Body:
 ```json
